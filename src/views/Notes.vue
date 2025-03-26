@@ -4,7 +4,7 @@ import {ref} from 'vue'
 
 let title = ref('')
 let text = ref('')
-const getInitialPosts =  () =>[
+const getInitialPosts = () => [
   {
     id: 1,
     title: 'Title1',
@@ -22,6 +22,7 @@ const getInitialPosts =  () =>[
   }
 ]
 const posts = ref(getInitialPosts())
+
 function addPost() {
   const newPost = {
     id: Date.now(),
@@ -37,7 +38,7 @@ function addPost() {
 <template>
   <main>
     <form class="inputs" @submit.prevent="addPost">
-      <h4>Создание поста</h4>
+      <h2>Создание поста</h2>
       <div class="form__group field">
         <input
             v-model="title"
@@ -46,7 +47,7 @@ function addPost() {
             placeholder="Name"
             name="title"
             id='title'
-            required />
+            required/>
         <label for="title" class="form__label">Назавние</label>
       </div>
       <div class="form__group field">
@@ -57,7 +58,7 @@ function addPost() {
             placeholder="Name"
             name="text"
             id='text'
-            required />
+            required/>
         <label for="text" class="form__label">Текст</label>
       </div>
       <button type="submit">Отправить</button>
@@ -69,15 +70,16 @@ function addPost() {
           :title=post.title
           :text=post.text
           @delete="posts.splice(index, 1)"
-       />
+      />
     </TransitionGroup>
   </main>
 </template>
 
 <style scoped lang="scss">
-main{
+main {
   padding: 15px;
 }
+
 $primary: #11998e;
 $secondary: #38ef7d;
 $black: #2c2c2c;
@@ -130,32 +132,44 @@ $gray: #9b9b9b;
     transition: 0.2s;
     font-size: 1rem;
     color: $primary;
-    font-weight:700;
+    font-weight: 700;
   }
+
   padding-bottom: 6px;
   //font-weight: 700;
   border-width: 3px;
-  border-image: linear-gradient(to right, $primary,$secondary);
+  border-image: linear-gradient(to right, $primary, $secondary);
   border-image-slice: 1;
 }
-/* reset input */
-.form__field{
-  &:required,&:invalid { box-shadow:none; }
-}
-/* demo */
 
-//////////
+.form__field {
+  &:required, &:invalid {
+    box-shadow: none;
+  }
+}
 
 .inputs {
+  border: 3px solid teal;
+  padding: 10px;
+  border-radius: 10px;
+  width: 50%;
+  margin-left: 25%;
+  margin-bottom: 30px;
   display: flex;
   flex-direction: column;
 
+  h2 {
+    color: teal;
+  }
+
   button {
+    border-radius: 10px;
     padding: 10px 15px;
     border: 2px solid teal;
     background: transparent;
     margin-top: 10px;
     margin-left: auto;
+    transition: 0.2s ease;
 
     &:hover {
       color: aquamarine;
@@ -164,13 +178,13 @@ $gray: #9b9b9b;
     }
   }
 }
-.container{
-  .container {
-    position: relative;
-    padding: 0;
-    list-style-type: none;
-  }
+
+.container {
+  position: relative;
+  padding: 0;
+  list-style-type: none;
 }
+
 /* 1. declare transition */
 .fade-move,
 .fade-enter-active,
@@ -184,9 +198,11 @@ $gray: #9b9b9b;
   opacity: 0;
   transform: scaleY(0.01) translate(30px, 0);
 }
+
 /* 3. ensure leaving items are taken out of layout flow so that moving
       animations can be calculated correctly. */
 .fade-leave-active {
   position: absolute;
+  width: 100%;
 }
 </style>

@@ -7,12 +7,18 @@ import MainLayout from "@/layouts/MainLayout.vue";
     {
       path: '/',
       name: 'Notes',
-      meta: {layout: MainLayout},
+      meta: {
+        title: 'Notes',
+        layout: MainLayout
+      },
       component: () => import('@/views/Notes.vue')
     },
     {
       path: '/test',
-      meta: {layout: MainLayout},
+      meta: {
+        title: 'Test',
+        layout: MainLayout
+      },
       component: () => import('@/views/Test.vue')
     }
   ]
@@ -21,6 +27,10 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 });
+
+router.beforeEach((to, from) => {
+  document.title = to.meta?.title ?? 'Default Title'
+})
 
 export const route = reactive(router.currentRoute);
 export default router

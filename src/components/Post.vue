@@ -23,17 +23,23 @@ defineProps({
 
 <style scoped lang="scss">
 .post{
+  position: relative;
   margin-top: 15px;
   border: 2px solid black;
+  border-radius: 10px;
   padding: 10px;
   min-height: 100px;
   &__title {
   }
   button{
-    margin-top: 10px;
+    position: absolute;
+    border-radius: 10px;
+    top: 10px;
+    right: 10px;
     padding: 10px;
     border: 2px solid red;
     background: transparent;
+    transition:  0.2s ease;
     &:hover{
       background: red;
       color: white;
