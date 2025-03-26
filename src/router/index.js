@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { reactive } from 'vue';
 import MainLayout from "@/layouts/MainLayout.vue";
-import EmptyLayout from "@/layouts/EmptyLayout.vue";
+//import EmptyLayout from "@/layouts/EmptyLayout.vue";
 
   export const routes= [
     {
@@ -12,7 +12,7 @@ import EmptyLayout from "@/layouts/EmptyLayout.vue";
     },
     {
       path: '/test',
-      meta: {layout: EmptyLayout},
+      meta: {layout: MainLayout},
       component: () => import('@/views/Test.vue')
     }
   ]

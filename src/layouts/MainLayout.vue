@@ -1,6 +1,9 @@
+<script setup>
+import AppLayoutHeader from "@/components/AppLayoutHeader.vue";
+</script>
 <template>
   <div>
-    <h1>MainLayout</h1>
+    <app-layout-header />
     <slot />
   </div>
 </template>

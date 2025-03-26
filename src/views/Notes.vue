@@ -1,9 +1,7 @@
 <script setup>
 import Post from '../components/Post.vue'
 import {ref} from 'vue'
-import { useRoute } from 'vue-router'
 
-const route = useRoute()
 let title = ref('')
 let text = ref('')
 const getInitialPosts =  () =>[
@@ -30,25 +28,39 @@ function addPost() {
     title: title.value,
     text: text.value,
   }
-  console.log(route.meta.layoutComponent)
   posts.value.push(newPost)
+  title.value = ''
+  text.value = ''
 }
 </script>
 
 <template>
   <main>
-    <router-link to="/test">Test</router-link>
-    <form class="inputs" @submit.prevent>
+    <form class="inputs" @submit.prevent="addPost">
       <h4>Создание поста</h4>
       <div class="form__group field">
-        <input v-model="title" type="text" class="form__field" placeholder="Name" name="name" id='name' required />
-        <label for="name" class="form__label">Назавние</label>
+        <input
+            v-model="title"
+            type="text"
+            class="form__field"
+            placeholder="Name"
+            name="title"
+            id='title'
+            required />
+        <label for="title" class="form__label">Назавние</label>
       </div>
       <div class="form__group field">
-        <input v-model="text" type="text" class="form__field" placeholder="Name" name="name" id='name' required />
-        <label for="name" class="form__label">Текст</label>
+        <input
+            v-model="text"
+            type="text"
+            class="form__field"
+            placeholder="Name"
+            name="text"
+            id='text'
+            required />
+        <label for="text" class="form__label">Текст</label>
       </div>
-      <button @click="addPost">Отправить</button>
+      <button type="submit">Отправить</button>
     </form>
     <TransitionGroup tag="div" name="fade" class="container">
       <Post
@@ -63,6 +75,9 @@ function addPost() {
 </template>
 
 <style scoped lang="scss">
+main{
+  padding: 15px;
+}
 $primary: #11998e;
 $secondary: #38ef7d;
 $black: #2c2c2c;
@@ -72,7 +87,7 @@ $gray: #9b9b9b;
   padding: 15px 0 0;
   margin-top: 10px;
   margin-bottom: 10px;
-  width: 50%;
+  width: 100%;
 }
 
 .form__field {
