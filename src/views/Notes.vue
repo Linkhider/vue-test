@@ -1,7 +1,9 @@
 <script setup>
 import Post from '../components/Post.vue'
 import {ref} from 'vue'
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
 let title = ref('')
 let text = ref('')
 const getInitialPosts =  () =>[
@@ -28,16 +30,24 @@ function addPost() {
     title: title.value,
     text: text.value,
   }
+  console.log(route.meta.layoutComponent)
   posts.value.push(newPost)
 }
 </script>
 
 <template>
   <main>
+    <router-link to="/test">Test</router-link>
     <form class="inputs" @submit.prevent>
       <h4>Создание поста</h4>
-      <input type="text" v-model="title" placeholder="Назавние">
-      <input type="text" v-model="text" placeholder="Текст">
+      <div class="form__group field">
+        <input v-model="title" type="text" class="form__field" placeholder="Name" name="name" id='name' required />
+        <label for="name" class="form__label">Назавние</label>
+      </div>
+      <div class="form__group field">
+        <input v-model="text" type="text" class="form__field" placeholder="Name" name="name" id='name' required />
+        <label for="name" class="form__label">Текст</label>
+      </div>
       <button @click="addPost">Отправить</button>
     </form>
     <TransitionGroup tag="div" name="fade" class="container">
@@ -53,16 +63,77 @@ function addPost() {
 </template>
 
 <style scoped lang="scss">
+$primary: #11998e;
+$secondary: #38ef7d;
+$black: #2c2c2c;
+$gray: #9b9b9b;
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 50%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid $gray;
+  outline: 0;
+  font-size: 1.3rem;
+  color: $black;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: $gray;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $primary;
+    font-weight:700;
+  }
+  padding-bottom: 6px;
+  //font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, $primary,$secondary);
+  border-image-slice: 1;
+}
+/* reset input */
+.form__field{
+  &:required,&:invalid { box-shadow:none; }
+}
+/* demo */
+
+//////////
+
 .inputs {
   display: flex;
   flex-direction: column;
-
-  input {
-    width: 100%;
-    border: 1px solid teal;
-    padding: 10px 15px;
-    margin-top: 10px;
-  }
 
   button {
     padding: 10px 15px;
