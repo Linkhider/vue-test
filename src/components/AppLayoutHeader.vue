@@ -2,7 +2,7 @@
   <div class="header-wrap">
     <div class="header">
       <router-link class="header__item" to="/">Main</router-link>
-      <router-link class="header__item" to="/test">Test</router-link>
+      <router-link class="header__item" to="/currency">Currency</router-link>
     </div>
   </div>
 

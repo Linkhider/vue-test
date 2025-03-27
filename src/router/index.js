@@ -14,13 +14,25 @@ import MainLayout from "@/layouts/MainLayout.vue";
       component: () => import('@/views/Notes.vue')
     },
     {
-      path: '/test',
+      path: '/currency',
       meta: {
-        title: 'Test',
+        title: 'Currency',
         layout: MainLayout
       },
-      component: () => import('@/views/Test.vue')
-    }
+      component: () => import('@/views/Currency.vue'),
+      children: [
+        {
+          path: 'converter',
+          name: 'Converter',
+          component: () => import('@/views/Converter.vue'),
+          params: true
+        },
+      ],
+    },
+    {
+      path: '/:pathMatch(.*)*', // 404 Redirect
+      redirect: '/',
+    },
   ]
 
 const router = createRouter({
