@@ -1,7 +1,9 @@
 <script setup>
 import Post from '../components/Post.vue'
-import {ref} from 'vue'
+import { ref, onMounted } from 'vue'
+import Loader from '@/components/Loader.vue'
 
+let loading = ref(true)
 let title = ref('')
 let text = ref('')
 const getInitialPosts = () => [
@@ -19,6 +21,21 @@ const getInitialPosts = () => [
     id: 3,
     title: 'Title3',
     text: 'text3',
+  },
+  {
+    id: 1,
+    title: 'Title4',
+    text: 'text4',
+  },
+  {
+    id: 2,
+    title: 'Title5',
+    text: 'text5',
+  },
+  {
+    id: 3,
+    title: 'Title6',
+    text: 'text6',
   }
 ]
 const posts = ref(getInitialPosts())
@@ -33,10 +50,16 @@ function addPost() {
   title.value = ''
   text.value = ''
 }
+onMounted(() => {
+  setTimeout(() => {
+    loading.value = false
+  }, 1000)
+})
 </script>
 
 <template>
-  <main>
+  <Loader v-if="loading"/>
+  <main v-else>
     <form class="inputs" @submit.prevent="addPost">
       <h2>Создание поста</h2>
       <div class="form__group field">
@@ -149,6 +172,7 @@ $gray: #9b9b9b;
 }
 
 .inputs {
+  background: rgba(0, 128, 128, 0.05);
   border: 3px solid teal;
   padding: 10px;
   border-radius: 10px;

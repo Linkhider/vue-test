@@ -23,6 +23,7 @@ defineProps({
 
 <style scoped lang="scss">
 .post{
+  background: rgba(0, 128, 128, 0.05);
   position: relative;
   margin-top: 15px;
   border: 2px solid black;
@@ -30,6 +31,7 @@ defineProps({
   padding: 10px;
   min-height: 100px;
   &__title {
+    color: teal;
   }
   button{
     position: absolute;
